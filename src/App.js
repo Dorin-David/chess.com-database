@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import {useState} from 'react';
+import UserCard from "./containers/userCard";
+import Form from "./components/Form";
+
+/*
+1) prepare form logic and pass it to the userCard components; make sure we never pass an empty value
+*/
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const [query, setQuery] = useState('');
+  const [searching, setSearching] = useState(false);
+  const [user, setUser] = useState(null)
+
+  function handleFormChange(e){
+    setQuery(e.target.value)
+  }
+
+  
+  function submitSearch() {
+    if (!query) return setSearching(false);
+    // if (!query) return 
+    setSearching(true)
+    setUser(query)
+    setQuery('')
+}
+
+  return (<>
+  <Form handleFormChange={handleFormChange} submitSearch={submitSearch} value={query}/>
+ {searching ? <UserCard user={user} /> : null}
+  </>)
 }
 
 export default App;
