@@ -1,10 +1,7 @@
 import {useState} from 'react';
-import UserCard from "./containers/userCard";
-import Form from "./components/Form";
-
-/*
-1) prepare form logic and pass it to the userCard components; make sure we never pass an empty value
-*/
+import UserCard from "./containers/userCard/userCard";
+import Form from "./components/UI/Form/Form";
+import './base.css'
 
 function App() {
   const [query, setQuery] = useState('');

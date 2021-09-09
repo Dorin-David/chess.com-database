@@ -1,0 +1,75 @@
+:root {
+    --text : #BCBBB8;
+    --icon: #B9CFA7;
+}
+
+.wrapper {
+    width: 50%;
+    height: 200px;
+    margin: 2rem auto;
+    display: flex;
+    align-items: flex-start;
+    padding: 0.5rem;
+    background: #393836;
+    color: var(--text);
+    border-radius: 4px;
+}
+
+.wrapper > img {
+    width: 150px;
+    height: 150px;
+}
+
+.username-wrapper {
+    width: 70%;
+    margin-left: 1rem;
+}
+
+  h1{
+    color: white;
+    display: inline;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    font-size: 1.3rem;
+}
+
+a:hover {
+    color: white;
+}
+
+.username-info {
+    display: flex;
+    align-items: center;
+    margin-top: 0.5rem;
+}
+
+.username-info > img {
+    margin-left: 0.5rem;
+}
+
+.name-location-followers {
+    min-width: 250px;
+    max-width: 90%;
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.2rem;
+}
+.username-wrapper > p {
+    margin: 0.4rem;
+    display: inline-block;
+}
+
+p {
+    margin: 0.4rem;
+}
+
+p > svg {
+    font-size: 1.1rem;
+    color: var(--icon)
+}
+
+
+
