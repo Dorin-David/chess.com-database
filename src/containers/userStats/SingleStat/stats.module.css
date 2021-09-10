@@ -1,0 +1,60 @@
+@import '../../../style/colors.css';
+
+.wrapper {
+    width: 90%;
+    padding: 0.7rem;
+    margin: 0.3rem auto;
+    background: var(--background);
+    border-radius: 4px;
+    border-bottom: 2px solid var(--text);
+}
+
+h2 {
+    color: var(--text);
+    text-align: center;
+    margin: 0.5rem;
+}
+
+.main-info {
+    cursor: pointer;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    color: var(--text);
+    font-weight: 600;
+}
+
+.main-info :first-child {
+    font-size: 1.3rem;
+}
+
+.main-info :nth-child(2){
+    display: block;
+    margin-right: auto;
+
+}
+
+.main-info :last-child{
+    font-size: 1.3rem;
+}
+
+.main-info:hover p {
+    color: white;
+}
+
+
+.stats p{
+    display: flex;
+    justify-content: space-between;
+    color: var(--text);
+    font-weight: 600;
+}
+
+.green {
+    color: var(--green);
+}
+
+.red {
+    color: var(--red)
+}

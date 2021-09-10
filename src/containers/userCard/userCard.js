@@ -6,11 +6,10 @@ import { HiStatusOnline } from 'react-icons/hi';
 import CountryFlag from '../../components/UI/CountryFlag';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import LinkIcon from '../../components/UI/LinkIcon/LinkIcon';
+import parseTimeStamp from '../../utils/timestampParser';
 import style from './user-card.module.css';
 
 function UserCard(props) {
-    //what's the logic for retrieving data? should we have a useEffect or rely on the 
-    // upper components which does not render the userCard unless a specific criteria is met
     const [user, setUser] = useState({});
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -21,12 +20,6 @@ function UserCard(props) {
             const url = `https://api.chess.com/pub/player/${props.user}`;
 
             try {
-                function parseTimeStamp(stamp) {
-                    const date = new Date(stamp * 1000);
-                    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-                    return `${date.getDate()} ${months[date.getMonth()].toUpperCase()} ${date.getFullYear()}`
-                }
-
                 const req = await fetch(url);
                 const data = await req.json();
 
@@ -70,7 +63,6 @@ function UserCard(props) {
                     <CountryFlag isoCode={user.country} />
                 </div>
                 <div className={style['name-location-followers']}>
-                {/* <p>{user.name ? <>{user.name}</> : null}</p> */}
                 {user.name ? <p>{user.name}</p> : null}
                 {user.location ? <p>{<MdLocationOn />} {user.location}</p> : null}
                 <p><FiUsers title="followers"  /> {user.followers}</p>

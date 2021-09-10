@@ -1,16 +1,13 @@
-:root {
-    --text : #BCBBB8;
-    --icon: #B9CFA7;
-}
+@import '../../style/colors.css';
 
 .wrapper {
     width: 50%;
     height: 200px;
     margin: 2rem auto;
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     padding: 0.5rem;
-    background: #393836;
+    background: var(--background);
     color: var(--text);
     border-radius: 4px;
 }
@@ -31,6 +28,7 @@
 }
 
 a {
+    margin-left: 0.3rem;
     text-decoration: none;
     color: inherit;
     font-size: 1.3rem;
@@ -54,17 +52,17 @@ a:hover {
     min-width: 250px;
     max-width: 90%;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     font-size: 1.2rem;
+}
+p {
+    margin: 0.3rem;
 }
 .username-wrapper > p {
     margin: 0.4rem;
     display: inline-block;
 }
 
-p {
-    margin: 0.4rem;
-}
 
 p > svg {
     font-size: 1.1rem;
