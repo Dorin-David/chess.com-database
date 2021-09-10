@@ -1,7 +1,6 @@
 import {useState} from 'react';
-import UserCard from "./containers/userCard/userCard";
-import UserStats from './containers/userStats/UserStats';
-import Form from "./components/UI/Form/Form";
+import UserData from './containers/userData/userData';
+import Form from "./components/Form/Form";
 import './style/base.css'
 
 function App() {
@@ -22,10 +21,7 @@ function App() {
 
  let userInfo = null;
  if(searching) {
-   userInfo = (<>
-   <UserCard user={user}/> 
-   <UserStats user={user}/>
-   </>)
+   userInfo = <UserData user={user}/>
  }
 
   return (<>
