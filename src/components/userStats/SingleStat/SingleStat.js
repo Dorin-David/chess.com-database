@@ -31,11 +31,11 @@ function SingleStat(props) {
     </div>)
 
     return (<div className={style.wrapper}>
-        <div className={style['main-info']}>
+        <div className={style['main-info']} onClick={toggleInfo}>
             {icons[props.icon]}
             <p>{props.game}</p>
             <p>{props.rating}</p>
-            {openInfo ?  <OpenArrow onClick={toggleInfo} /> : <CloseArrow onClick={toggleInfo} />}
+            {openInfo ?  <OpenArrow/> : <CloseArrow/>}
         </div>
             {openInfo && props.rating ? stats : openInfo && !props.rating ? <p>No games played</p> : null}
     </div>)

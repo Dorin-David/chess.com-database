@@ -1,3 +1,11 @@
+.wrapper {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 0.5fr 0.6fr;
+    grid-auto-rows: minmax(150px, auto);
+}
+
+
 .error {
 	color: rgb(244, 206, 200);
 	text-align: center;

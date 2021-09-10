@@ -91,7 +91,7 @@ function UserData(props){
 
     let userData = <Spinner />;
     if(!loading) {
-        userData = (<>
+        userData = (<div className={style.wrapper}>
             <UserCard 
              avatar={user.avatar}
              username={user.username}
@@ -104,7 +104,7 @@ function UserData(props){
              lastOnline={user.lastOnline}
             />
             <UserStats gamesStats={gamesStats}/>
-           </>)
+           </div>)
 
     }
 
