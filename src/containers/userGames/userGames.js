@@ -1,4 +1,7 @@
 import { useState, useEffect } from 'react';
+import gamesParser from '../../utils/gamesParser';
+import Game from '../../components/Game/Game';
+import Button from '../../components/UI/Button/Button';
 
 function UserGames(props) {
     const [counter, setCounter] = useState(0);
@@ -55,8 +58,24 @@ function UserGames(props) {
         parsePlayerGames()
 
     }, [games, counter, userGamesArchive, offset])
-    console.log(games.slice(0, offset))
-    return <h1>Test</h1>
+
+    function increaseOffset() {
+        setOffset(offset => offset + 25)
+    }
+
+    return (<div>
+        {gamesParser(games.slice(0, offset)).map(game => {
+            return <Game
+             username={props.user}
+             gameType={game.gameType}
+             white={game.white}
+             black={game.black}
+             accuracies={game.accuracies}
+             date={game.date}   
+            />
+        })}
+        <Button onButtonClick={increaseOffset}>Show more</Button>
+    </div>)
 
 
 }
