@@ -37,7 +37,7 @@ function SingleStat(props) {
             <p>{props.rating}</p>
             {openInfo ?  <OpenArrow onClick={toggleInfo} /> : <CloseArrow onClick={toggleInfo} />}
         </div>
-            {openInfo ? stats : null}
+            {openInfo && props.rating ? stats : openInfo && !props.rating ? <p>No games played</p> : null}
     </div>)
 
 }

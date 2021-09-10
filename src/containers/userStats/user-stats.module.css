@@ -4,3 +4,20 @@
     background: #2e2d2b;
     border-radius: 4px;
 }
+
+.stats-wrapper > p{
+    width: 85%;
+    margin: 0.7rem auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--text);
+    font-size: 1.1rem;
+    font-weight: 600;
+
+}
+
+.stats-wrapper p > svg {
+    font-size: 1.5rem;
+    color: var(--text);
+}

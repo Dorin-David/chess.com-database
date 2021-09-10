@@ -16,7 +16,7 @@ function App() {
   function submitSearch() {
     if (!query) return setSearching(false);
     setSearching(true)
-    setUser(query)
+    setUser(query.trim().toLowerCase())
     setQuery('')
 }
 
