@@ -1,0 +1,72 @@
+@import '../../style/colors.css';
+
+.wrapper {
+	width: 60%;
+	/* height: 45px; */
+    display: flex;
+	justify-content: space-around;
+	align-items: center;
+	margin: 0.5rem auto;
+    padding: 0.5rem;
+    background: #333230;
+    color: var(--text);
+    border-radius: 4px;
+}
+
+.wrapper svg {
+    font-size: 1.3rem;
+}
+
+.userColor {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 4px;
+    margin-right: 0.2rem;
+}
+
+.white {
+   background: white;
+}
+
+.black {
+    background: black;
+}
+
+.players {
+    min-width: 220px;
+}
+
+.accuracy {
+    width: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.accuracy p {
+    margin: 0;
+}
+
+.date {
+    width: 120px;
+}
+
+.wrapper :is(.won,
+.lost,
+.draw ){
+    font-size: 1.2rem;
+}
+
+.won {
+    color: #769656;
+}
+
+.lost {
+  color: #b23330;
+}
+
+.draw {
+   color: #8d8c8a;
+}

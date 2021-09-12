@@ -3,6 +3,8 @@ import gamesParser from '../../utils/gamesParser';
 import Game from '../../components/Game/Game';
 import Button from '../../components/UI/Button/Button';
 import Spinner from '../../components/UI/Spinner/Spinner';
+import style from './user-games.module.css';
+
 
 function UserGames(props) {
     const [counter, setCounter] = useState(null);
@@ -44,7 +46,7 @@ function UserGames(props) {
                     const specificMonthGamesUrl = userGamesArchive[j];
                     const req = await fetch(specificMonthGamesUrl);
                     const data = await req.json();
-                    parsedGames.push(...data.games)
+                    parsedGames.push(...data.games.reverse())
                     j--
                 }
                 if (j !== counter) {
@@ -67,7 +69,7 @@ function UserGames(props) {
 
     let info = <Spinner></Spinner>
     if(!loading){
-        info = (<div>
+        info = (<div className={style['games-wrapper']}>
             {gamesParser(games.slice(0, offset)).map(game => {
                 return <Game
                  key={game.timestamp}
@@ -76,7 +78,8 @@ function UserGames(props) {
                  white={game.white}
                  black={game.black}
                  accuracies={game.accuracies}
-                 date={game.date}   
+                 date={game.date}  
+                 link={game.link} 
                 />
             })}
             <Button onButtonClick={increaseOffset}>Show more</Button>

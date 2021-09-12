@@ -5,6 +5,8 @@ import { FaCalendarDay as Daily} from 'react-icons/fa';
 import { FaPlusSquare as Won} from 'react-icons/fa';
 import { FaMinusSquare as Lost } from 'react-icons/fa';
 import { BsSquareHalf as Draw } from 'react-icons/bs';
+import LinkIcon from '../UI/LinkIcon/LinkIcon';
+import style from './game.module.css';
 
 const icons = {
     rapid: <Rapid style={{color: '#6c9d41'}}/>,
@@ -16,23 +18,24 @@ const icons = {
 function Game(props){
     const userColor = props.white.username === props.username ? 'white' : 'black';
     const hasUserWon = props[userColor].result === 'win';
-    let accuracies = '-';
+    let accuracies = <div className={style.accuracy}>-</div>;
     if(props.accuracies){
-        accuracies = (<div>
+        accuracies = (<div className={style.accuracy}>
             <p>{props.accuracies.white}</p>
-            <p>{props.accuracies.white}</p>
+            <p>{props.accuracies.black}</p>
             </div>)
     }
 
-    return (<div>
+    return (<div className={style.wrapper}>
         {icons[props.gameType]}
-        <div>
-            <p>{props.white.username}</p>
-            <p>{props.black.username}</p>
+        <div className={style.players}>
+            <p><span className={[style.userColor, style.white].join(' ')}></span> {props.white.username} ({props.white.rating})</p>
+            <p><span className={[style.userColor, style.black].join(' ')}></span>{props.black.username} ({props.black.rating})</p>
         </div>
-        {props.white.result === 'agreed' ? <Draw/> : hasUserWon ? <Won/> : <Lost/>}
+        {props.white.result === 'agreed' ? <Draw className={style.draw}/> : hasUserWon ? <Won className={style.won}/> : <Lost className={style.lost}/>}
         {accuracies}
-        <p>{props.date}</p>
+        <p className={style.date}>{props.date}</p>
+        <LinkIcon link={props.link}/>
 
     </div>)
 
