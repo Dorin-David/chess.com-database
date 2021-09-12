@@ -2,9 +2,10 @@ import { useState, useEffect } from 'react';
 import gamesParser from '../../utils/gamesParser';
 import Game from '../../components/Game/Game';
 import Button from '../../components/UI/Button/Button';
+import Spinner from '../../components/UI/Spinner/Spinner';
 
 function UserGames(props) {
-    const [counter, setCounter] = useState(0);
+    const [counter, setCounter] = useState(null);
     const [userGamesArchive, setuserGamesArchive] = useState([]);
 
     const [games, setGames] = useState([]);
@@ -39,17 +40,18 @@ function UserGames(props) {
                 let parsedGames = [...games];
                 let j = counter;
                 while (parsedGames.length < offset) {
+                    if(j === null) return setLoading(false)
                     const specificMonthGamesUrl = userGamesArchive[j];
                     const req = await fetch(specificMonthGamesUrl);
                     const data = await req.json();
-                    parsedGames = parsedGames.concat(parsedGames, data.games);
+                    parsedGames.push(...data.games)
                     j--
                 }
                 if (j !== counter) {
                     setGames(parsedGames);
                     setCounter(j);
-                    setLoading(false)
                 }
+                setLoading(false)
             } catch (err) {
                 setError(true);
                 setLoading(false)
@@ -63,19 +65,25 @@ function UserGames(props) {
         setOffset(offset => offset + 25)
     }
 
-    return (<div>
-        {gamesParser(games.slice(0, offset)).map(game => {
-            return <Game
-             username={props.user}
-             gameType={game.gameType}
-             white={game.white}
-             black={game.black}
-             accuracies={game.accuracies}
-             date={game.date}   
-            />
-        })}
-        <Button onButtonClick={increaseOffset}>Show more</Button>
-    </div>)
+    let info = <Spinner></Spinner>
+    if(!loading){
+        info = (<div>
+            {gamesParser(games.slice(0, offset)).map(game => {
+                return <Game
+                 key={game.timestamp}
+                 username={props.user}
+                 gameType={game.gameType}
+                 white={game.white}
+                 black={game.black}
+                 accuracies={game.accuracies}
+                 date={game.date}   
+                />
+            })}
+            <Button onButtonClick={increaseOffset}>Show more</Button>
+        </div>)
+    }
+
+    return info
 
 
 }

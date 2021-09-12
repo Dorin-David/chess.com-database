@@ -1,14 +1,3 @@
-/*
-const data = {
-            link: game.url,
-            date: timestampParser(game.end_time),
-            accuracies: (game.accuracies || null),
-            gameType: game.time_class,
-            white: game.white,
-            black: game.black
-        }
-*/
-
 import { BsClockFill as Rapid } from 'react-icons/bs';
 import { BsLightningFill as Blitz } from 'react-icons/bs';
 import { GiSupersonicBullet as Bullet } from 'react-icons/gi';
