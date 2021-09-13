@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
+import Spinner from '../../components/UI/Spinner/Spinner';
+import timestampParser from '../../utils/timestampParser';
 import UserStats from '../../components/userStats/UserStats';
 import UserCard from '../../components/userCard/userCard';
 import UserGames from '../userGames/userGames';
-import Spinner from '../../components/UI/Spinner/Spinner';
-import timestampParser from '../../utils/timestampParser';
 import style from './user-data.module.css';
 
 function UserData(props){
@@ -105,8 +105,8 @@ function UserData(props){
              lastOnline={user.lastOnline}
             />
             <UserStats gamesStats={gamesStats}/>
-           </div>
            <UserGames user={props.user}/>
+           </div>
            </>)
 
     }

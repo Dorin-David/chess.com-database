@@ -70,6 +70,7 @@ function UserGames(props) {
     let info = <Spinner></Spinner>
     if(!loading){
         info = (<div className={style['games-wrapper']}>
+         <h1>Games</h1>
             {gamesParser(games.slice(0, offset)).map(game => {
                 return <Game
                  key={game.timestamp}
@@ -83,7 +84,8 @@ function UserGames(props) {
                 />
             })}
             <Button onButtonClick={increaseOffset}>Show more</Button>
-        </div>)
+        </div>
+        )
     }
 
     return info
