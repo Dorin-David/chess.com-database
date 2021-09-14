@@ -22,15 +22,6 @@ https://projects.lukehaas.me/css-loaders/ */
   -webkit-animation-delay: -0.16s;
   animation-delay: -0.16s;
 }
-
-.central {
-  position: absolute;
-  margin: auto;
-  top: 250px;
-  left: 0;
-  right: 0;
-  bottom: 0;
-}
 .loader:before,
 .loader:after {
   position: absolute;

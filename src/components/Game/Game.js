@@ -26,8 +26,6 @@ function Game(props){
             </div>)
     }
 
-    console.log(props.white.result)
-
     return (<div className={style.wrapper}>
         {icons[props.gameType]}
         <div className={style.players}>
