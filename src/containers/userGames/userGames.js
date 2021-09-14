@@ -67,7 +67,7 @@ function UserGames(props) {
         setOffset(offset => offset + 25)
     }
 
-    let info = <Spinner></Spinner>
+    let info = <Spinner central={true}></Spinner>
     if(!loading){
         info = (<div className={style['games-wrapper']}>
          <h1>Games</h1>

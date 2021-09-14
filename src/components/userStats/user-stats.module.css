@@ -1,5 +1,6 @@
 .stats-wrapper {
     width: 250px;
+    min-height: 450px;
     padding: 0.7rem;
     background: #2e2d2b;
     border-radius: 4px;
@@ -11,7 +12,7 @@
 
 .stats-wrapper > p{
     width: 85%;
-    margin: 0.7rem auto;
+    margin: 0.9rem auto;
     display: flex;
     justify-content: space-between;
     align-items: center;

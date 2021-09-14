@@ -4,14 +4,14 @@ https://projects.lukehaas.me/css-loaders/ */
 .loader,
 .loader:before,
 .loader:after {
-  background: #7FA650;
+  background: #7fa650;
   -webkit-animation: load1 1s infinite ease-in-out;
   animation: load1 1s infinite ease-in-out;
   width: 1em;
   height: 4em;
 }
 .loader {
-  color: #7FA650;
+  color: #7fa650;
   text-indent: -9999em;
   margin: 88px auto;
   position: relative;
@@ -22,11 +22,20 @@ https://projects.lukehaas.me/css-loaders/ */
   -webkit-animation-delay: -0.16s;
   animation-delay: -0.16s;
 }
+
+.central {
+  position: absolute;
+  margin: auto;
+  top: 250px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
 .loader:before,
 .loader:after {
   position: absolute;
   top: 0;
-  content: '';
+  content: "";
 }
 .loader:before {
   left: -1.5em;

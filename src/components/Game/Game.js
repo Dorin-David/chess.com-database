@@ -26,13 +26,19 @@ function Game(props){
             </div>)
     }
 
+    console.log(props.white.result)
+
     return (<div className={style.wrapper}>
         {icons[props.gameType]}
         <div className={style.players}>
             <p><span className={[style.userColor, style.white].join(' ')}></span> {props.white.username} ({props.white.rating})</p>
             <p><span className={[style.userColor, style.black].join(' ')}></span>{props.black.username} ({props.black.rating})</p>
         </div>
-        {props.white.result === 'agreed' ? <Draw className={style.draw}/> : hasUserWon ? <Won className={style.won}/> : <Lost className={style.lost}/>}
+        {(props.white.result === 'agreed' 
+          || props.white.result === 'repetition'
+          || props.white.result === 'stalemate'
+          || props.white.result === '50move'
+          || props.white.result === 'timevsinsufficient') ? <Draw className={style.draw}/> : hasUserWon ? <Won className={style.won}/> : <Lost className={style.lost}/>}
         {accuracies}
         <p className={style.date}>{props.date}</p>
         <LinkIcon link={props.link}/>
