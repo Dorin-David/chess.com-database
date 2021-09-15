@@ -4,6 +4,7 @@ import timestampParser from '../../utils/timestampParser';
 import UserStats from '../../components/userStats/UserStats';
 import UserCard from '../../components/userCard/userCard';
 import UserGames from '../userGames/userGames';
+import FilterGames from '../filterGames/filterGames';
 import style from './user-data.module.css';
 
 function UserData(props){
@@ -105,7 +106,8 @@ function UserData(props){
              lastOnline={user.lastOnline}
             />
             <UserStats gamesStats={gamesStats}/>
-           <UserGames user={props.user}/>
+            <UserGames user={props.user}/>
+            <FilterGames />
            </div>
            </>)
 
