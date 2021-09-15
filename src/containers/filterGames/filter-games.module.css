@@ -1,12 +1,20 @@
-@import '../../style/colors.css';
+@import "../../style/colors.css";
 
-.pickers-wrapper {
-  width: 20%;
-  margin-left: auto;
-  display: flex;
+.filtering-wrapper {
   grid-area: filtering;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 500px;
+  padding: 0.7rem;
+  background: #2e2d2b;
+  border-radius: 4px;
 }
 
+.pickers-wrapper {
+  display: flex;
+}
 
 .wrapper {
   display: flex;
@@ -20,4 +28,15 @@
 .wrapper svg {
   font-size: 1.2rem;
   color: var(--text);
+}
+
+.select {
+  width: 90%;
+  margin: 0.6rem;
+  padding: 0.3rem;
+  font-size: 1rem;
+  background: var(--background);
+  color: var(--text);
+  border: 1px solid rgb(122, 119, 119);
+  border-radius: 4px;
 }

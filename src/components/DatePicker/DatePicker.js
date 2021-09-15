@@ -23,8 +23,10 @@ const months = [
 ];
 
 function PickDate(props) {
-    const [startDate, setStartDate] = useState(new Date());
-    const customButton = <button className={style.button}>{props.picker}</button>
+    const [startDate, setStartDate] = useState(null);
+    const customButton = <button className={style.button}>
+        {!startDate ? props.picker : `${startDate.getDate()}/${startDate.getMonth()}/${startDate.getFullYear()}`}
+        </button>
     return (
         <DatePicker
             customInput={customButton}

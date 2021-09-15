@@ -3,11 +3,11 @@
     width: 100%;
     display: grid;
     grid-template-columns: 1fr 0.7fr 0.3fr;
-    grid-auto-rows: minmax(150px, auto);
+    grid-template-rows: 300px minmax(300px, auto) 200px;
     grid-template-areas: 
     "user-card user-card stats"
-    "games       games   stats"
-    "games       games   stats"
+    "games       games   filtering"
+    /* "games       games   filtering" */
     ;
     margin-top: 2rem;
 }
