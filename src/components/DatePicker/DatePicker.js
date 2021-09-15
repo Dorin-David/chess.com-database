@@ -23,9 +23,8 @@ const months = [
 ];
 
 function PickDate(props) {
-    const [startDate, setStartDate] = useState(null);
     const customButton = <button className={style.button}>
-        {!startDate ? props.picker : `${startDate.getDate()}/${startDate.getMonth()}/${startDate.getFullYear()}`}
+        {typeof props.date === 'object' ? `${props.date.getDate()}/${props.date.getMonth() + 1}/${props.date.getFullYear()}` : props.picker}
         </button>
     return (
         <DatePicker
@@ -95,8 +94,8 @@ function PickDate(props) {
                     </button>
                 </div>
             )}
-            selected={startDate}
-            onChange={(date) => setStartDate(date)}
+            selected={props.date}
+            onChange={(date) => props.changeDate(date)}
         />
     )
 }

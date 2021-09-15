@@ -91,6 +91,10 @@ function UserData(props){
 
     }, [props.user])
 
+   function setFilteringRules(rules){
+        console.log(`received rules inside userData`, rules)
+   }
+
     let userData = <Spinner />;
     if(!loading) {
         userData = (<><div className={style.wrapper}>
@@ -107,7 +111,7 @@ function UserData(props){
             />
             <UserStats gamesStats={gamesStats}/>
             <UserGames user={props.user}/>
-            <FilterGames />
+            <FilterGames forwardRules={setFilteringRules}/>
            </div>
            </>)
 
