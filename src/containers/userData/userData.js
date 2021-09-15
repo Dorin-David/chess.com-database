@@ -107,8 +107,8 @@ function UserData(props){
             />
             <UserStats gamesStats={gamesStats}/>
             <UserGames user={props.user}/>
-            <FilterGames />
            </div>
+            <FilterGames />
            </>)
 
     }

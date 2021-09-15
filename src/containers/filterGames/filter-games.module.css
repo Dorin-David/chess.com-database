@@ -1,0 +1,23 @@
+@import '../../style/colors.css';
+
+.pickers-wrapper {
+  width: 20%;
+  margin-left: auto;
+  display: flex;
+  grid-area: filtering;
+}
+
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  margin: 0 0.5rem;
+  padding: 0.5rem;
+  border-radius: 4px;
+  background: var(--background);
+}
+
+.wrapper svg {
+  font-size: 1.2rem;
+  color: var(--text);
+}
