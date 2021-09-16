@@ -7,17 +7,29 @@ import UserGames from '../userGames/userGames';
 import FilterGames from '../filterGames/filterGames';
 import style from './user-data.module.css';
 
-function UserData(props){
+/*
+{
+  "startDate": "2021-09-13T22:00:00.000Z",
+  "endDate": "2021-09-22T22:00:00.000Z",
+  "result": "won",
+  "color": "white",
+  "order": "oldest"
+}
+*/
+
+function UserData(props) {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
     const [gamesStats, setGamesStats] = useState({})
     const [user, setUser] = useState({});
+    const [filterRules, setFilterRules] = useState({})
 
     useEffect(() => {
         setLoading(true)
         setError(false);
+        setFilterRules({})
 
-        async function fetchUserData(){
+        async function fetchUserData() {
             const userUrl = `https://api.chess.com/pub/player/${props.user}`;
             try {
                 //general user data
@@ -39,7 +51,7 @@ function UserData(props){
                 setUser(userData)
 
                 //user's stats
-           
+
                 const statsUrl = `https://api.chess.com/pub/player/${props.user}/stats`;
                 const stats_req = await fetch(statsUrl);
                 const statsData = await stats_req.json();
@@ -50,32 +62,32 @@ function UserData(props){
                         win: statsData.chess_rapid?.record?.win,
                         loss: statsData.chess_rapid?.record?.loss,
                         draw: statsData.chess_rapid?.record?.draw
-                     }, 
-                     chess_blitz: {
+                    },
+                    chess_blitz: {
                         rating: statsData.chess_blitz?.last?.rating,
                         best: statsData.chess_blitz?.best?.rating || '-',
                         win: statsData.chess_blitz?.record?.win,
                         loss: statsData.chess_blitz?.record?.loss,
                         draw: statsData.chess_blitz?.record?.draw
-                     }, 
-                 
-                     chess_bullet: {
+                    },
+
+                    chess_bullet: {
                         rating: statsData.chess_bullet?.last?.rating,
                         best: statsData.chess_bullet?.best?.rating || '-',
                         win: statsData.chess_bullet?.record?.win,
                         loss: statsData.chess_bullet?.record?.loss,
                         draw: statsData.chess_bullet?.record?.draw
-                     },
-                     chess_daily: {
+                    },
+                    chess_daily: {
                         rating: statsData.chess_daily?.last?.rating,
                         best: statsData.chess_daily?.best?.rating || '-',
                         win: statsData.chess_daily?.record?.win,
                         loss: statsData.chess_daily?.record?.loss,
                         draw: statsData.chess_daily?.record?.draw
                     }
-                    
-                    };
-                
+
+                };
+
                 setGamesStats(stats)
                 setLoading(false)
                 setError(false)
@@ -91,29 +103,29 @@ function UserData(props){
 
     }, [props.user])
 
-   function setFilteringRules(rules){
-        console.log(`received rules inside userData`, rules)
-   }
+    function setFilteringRules(rules) {
+        setFilterRules(rules)
+    }
 
     let userData = <Spinner />;
-    if(!loading) {
+    if (!loading) {
         userData = (<><div className={style.wrapper}>
-            <UserCard 
-             avatar={user.avatar}
-             username={user.username}
-             name={user.name}
-             link={user.link}
-             country={user.country} 
-             location={user.location}
-             followers={user.followers}
-             joined={user.joined}
-             lastOnline={user.lastOnline}
+            <UserCard
+                avatar={user.avatar}
+                username={user.username}
+                name={user.name}
+                link={user.link}
+                country={user.country}
+                location={user.location}
+                followers={user.followers}
+                joined={user.joined}
+                lastOnline={user.lastOnline}
             />
-            <UserStats gamesStats={gamesStats}/>
-            <UserGames user={props.user}/>
-            <FilterGames forwardRules={setFilteringRules}/>
-           </div>
-           </>)
+            <UserStats gamesStats={gamesStats} />
+            <UserGames user={props.user} filterRules={filterRules} />
+            <FilterGames forwardRules={setFilteringRules} />
+        </div>
+        </>)
 
     }
 

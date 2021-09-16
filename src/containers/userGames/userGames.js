@@ -3,6 +3,8 @@ import gamesParser from '../../utils/gamesParser';
 import Game from '../../components/Game/Game';
 import Button from '../../components/UI/Button/Button';
 import Spinner from '../../components/UI/Spinner/Spinner';
+import { getMonth } from '../../utils/getMonth';
+import { getYear } from '../../utils/getYear';
 import style from './user-games.module.css';
 
 
@@ -14,7 +16,7 @@ function UserGames(props) {
 
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
-    const [offset, setOffset] = useState(25)
+    const [offset, setOffset] = useState(25);
 
     useEffect(() => {
         setLoading(true);
@@ -23,7 +25,35 @@ function UserGames(props) {
             try {
                 const url = `https://api.chess.com/pub/player/${props.user}/games/archives`;
                 const req = await fetch(url);
-                const monthsGamesArchive = await req.json();
+                let monthsGamesArchive = await req.json();
+                /*
+{
+  "startDate": "2021-09-13T22:00:00.000Z",
+  "endDate": "2021-09-22T22:00:00.000Z",
+  "result": "won",
+  "color": "white",
+  "order": "oldest"
+}
+*/  
+              
+                if(props.filterRules.startDate || props.filterRules.endDate){
+                    monthsGamesArchive = {archives: monthsGamesArchive.archives.filter(archive => {
+                        //start date logic            
+                        const [archiveYear, archiveMonth] = archive.match(/[0-9]+\/[0-9]+$/)[0].split('/');
+                        const startYear = getYear(props.filterRules.startDate);
+                        const startMonth = getMonth(props.filterRules.startDate) + 1;                       
+                        //we have an end
+                        if(props.filterRules.endDate){
+                            const endYear = getYear(props.filterRules.endDate);
+                            const endMonth = getMonth(props.filterRules.endDate) + 1;
+                            //we have both start and end
+                            if(props.filterRules.startDate && props.filterRules.endDate) return archiveYear >= startYear && archiveYear <= endYear && archiveMonth >= startMonth && archiveMonth <= endMonth
+                            return archiveYear <= endYear && archiveMonth <= endMonth
+                        } else return archiveYear >= startYear && archiveMonth >= startMonth
+                    })}
+
+                }
+                console.log(monthsGamesArchive)
                 setuserGamesArchive(monthsGamesArchive.archives)
                 setCounter(monthsGamesArchive.archives.length - 1)
                 setLoading(false)
@@ -33,7 +63,7 @@ function UserGames(props) {
             }
         }
         getPlayerGames()
-    }, [props.user])
+    }, [props.user, props.filterRules])
 
     useEffect(() => {
         setLoading(true)
@@ -41,7 +71,8 @@ function UserGames(props) {
             try {
                 let parsedGames = [...games];
                 let j = counter;
-                while (parsedGames.length < offset) {
+                if(props.filterRules.startDate || props.filterRules.endDate) parsedGames = []; 
+                while (j > 0) {
                     if(j === null) return setLoading(false)
                     const specificMonthGamesUrl = userGamesArchive[j];
                     const req = await fetch(specificMonthGamesUrl);
@@ -61,7 +92,7 @@ function UserGames(props) {
         }
         parsePlayerGames()
 
-    }, [games, counter, userGamesArchive, offset])
+    }, [games, counter, userGamesArchive, offset, props.filterRules])
 
     function increaseOffset() {
         setOffset(offset => offset + 25)

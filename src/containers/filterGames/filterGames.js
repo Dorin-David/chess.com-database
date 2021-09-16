@@ -46,7 +46,7 @@ function FilterGames(props) {
             <option value="black">Black</option>
         </select>
         <select name="order" className={style.select} onChange={(value) => setOrder(value.currentTarget.value)}>
-            <option value="newest" selected>Newest</option>
+            <option value="newest" defaultValue >Newest</option>
             <option value="oldest">Oldest</option>
         </select>
 
