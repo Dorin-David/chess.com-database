@@ -95,7 +95,11 @@ function PickDate(props) {
             )}
             selected={props.date}
             onChange={(date) => props.changeDate(date)}
-        />
+        > <div className={style['btn-wrapper']}>
+            <button className={[style['helper-btn'], style.cancel].join(' ')} onClick={() => props.changeDate(undefined)}>Clear</button>
+            <button className={[style['helper-btn'], style.day].join(' ')} onClick={() => props.changeDate(new Date())}>Today</button>
+            </div>             
+            </DatePicker>
     )
 }
 

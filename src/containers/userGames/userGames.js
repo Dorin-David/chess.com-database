@@ -22,6 +22,7 @@ function UserGames(props) {
         setLoading(true);
         setError(false);
         async function getPlayerGames() {
+            console.log(`passed rules are`, props.filterRules)
             try {
                 const url = `https://api.chess.com/pub/player/${props.user}/games/archives`;
                 const req = await fetch(url);
@@ -53,7 +54,6 @@ function UserGames(props) {
                     })}
 
                 }
-                console.log(monthsGamesArchive)
                 setuserGamesArchive(monthsGamesArchive.archives)
                 setCounter(monthsGamesArchive.archives.length - 1)
                 setLoading(false)
@@ -68,11 +68,13 @@ function UserGames(props) {
     useEffect(() => {
         setLoading(true)
         async function parsePlayerGames() {
+
             try {
                 let parsedGames = [...games];
                 let j = counter;
                 if(props.filterRules.startDate || props.filterRules.endDate) parsedGames = []; 
-                while (j > 0) {
+                const condition = () => (props.filterRules.startDate || props.filterRules.endDate) ? j >= 0 : parsedGames.length < offset
+                while (condition()) {
                     if(j === null) return setLoading(false)
                     const specificMonthGamesUrl = userGamesArchive[j];
                     const req = await fetch(specificMonthGamesUrl);
@@ -80,6 +82,7 @@ function UserGames(props) {
                     parsedGames.push(...data.games.reverse())
                     j--
                 }
+
                 if (j !== counter) {
                     setGames(parsedGames);
                     setCounter(j);

@@ -11,6 +11,14 @@ function FilterGames(props) {
     const [color, setColor] = useState('');
     const [order, setOrder] = useState('');
 
+    function clearFilteringRules(){
+        setStartDate(undefined);
+        setEndDate(undefined);
+        setResult("");
+        setColor("");
+        setOrder("");
+    }
+    
     function forwardFilteringRules(){
         const rules = {
             startDate,
