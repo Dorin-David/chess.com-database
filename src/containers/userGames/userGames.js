@@ -5,6 +5,7 @@ import Button from '../../components/UI/Button/Button';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import { getMonth } from '../../utils/getMonth';
 import { getYear } from '../../utils/getYear';
+import { filterGames } from '../../utils/filterGames';
 import style from './user-games.module.css';
 
 
@@ -54,7 +55,6 @@ function UserGames(props) {
         }
         getPlayerGames()
     }, [props.user, props.filterRules])
-
     useEffect(() => {
         setLoading(true);
         setError(false)
@@ -70,32 +70,7 @@ function UserGames(props) {
                     const data = await req.json();
                     let fetchedGames = [...data.games];
 
-                    if(props.filterRules.order !== 'oldest') fetchedGames.reverse()
-                                 
-                    if(props.filterRules.color) fetchedGames = fetchedGames.filter(game => game[props.filterRules.color].username.toLowerCase() === props.filterRules.user)
-
-                    if(props.filterRules.result){
-                        let gameResult;
-                        fetchedGames = fetchedGames.filter(game => {
-                            const userColor = game.white.username.toLowerCase() === props.filterRules.user ? 'white' : 'black';
-                            switch(game[userColor].result){
-                                case 'win':
-                                gameResult = 'win';
-                                break;
-                                case 'agreed':
-                                case 'repetition':
-                                case 'stalemate':
-                                case 'insufficient':
-                                case '50move':
-                                case 'timevsinsufficient':
-                                gameResult = 'draw';
-                                break;
-                                default:
-                                gameResult = 'lose'
-                            }
-                            return gameResult === props.filterRules.result
-                        })
-                    }
+                    fetchedGames = filterGames(fetchedGames, props.filterRules)
                     parsedGames.push(...fetchedGames);
                     j--
                 }

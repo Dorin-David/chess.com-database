@@ -16,7 +16,6 @@ const icons = {
 }
 
 function Game(props){
-    console.log(`from Game, user is ${props.username}`)
     const userColor = props.white.username.toLowerCase() === props.username ? 'white' : 'black';
     const hasUserWon = props[userColor].result === 'win';
     let accuracies = <div className={style.accuracy}>-</div>;
