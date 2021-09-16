@@ -26,16 +26,7 @@ function UserGames(props) {
                 const url = `https://api.chess.com/pub/player/${props.user}/games/archives`;
                 const req = await fetch(url);
                 let monthsGamesArchive = await req.json();
-                /*
-{
-  "startDate": "2021-09-13T22:00:00.000Z",
-  "endDate": "2021-09-22T22:00:00.000Z",
-  "result": "won",
-  "color": "white",
-  "order": "oldest"
-}
-*/  
-              
+                
                 if(props.filterRules.startDate || props.filterRules.endDate){
                     monthsGamesArchive = {archives: monthsGamesArchive.archives.filter(archive => {
                         //start date logic            
@@ -68,18 +59,45 @@ function UserGames(props) {
         setLoading(true);
         setError(false)
         async function parsePlayerGames() {
-
             try {
                 let parsedGames = [...games];
                 let j = counter;
                 if(props.filterRules.startDate || props.filterRules.endDate) parsedGames = []; 
-                const condition = () => (props.filterRules.startDate || props.filterRules.endDate) ? j >= 0 : parsedGames.length < offset
-                while (condition()) {
+                while (j >= 0 && parsedGames.length < (offset * 4)) {
                     if(j === null) return setLoading(false)
                     const specificMonthGamesUrl = userGamesArchive[j];
                     const req = await fetch(specificMonthGamesUrl);
                     const data = await req.json();
-                    parsedGames.push(...data.games.reverse())
+                    let fetchedGames = [...data.games];
+
+                    if(props.filterRules.order !== 'oldest') fetchedGames.reverse()
+                                 
+                    if(props.filterRules.color) fetchedGames = fetchedGames.filter(game => game[props.filterRules.color].username.toLowerCase() === props.filterRules.user)
+
+                    if(props.filterRules.result){
+                        let gameResult;
+                        fetchedGames = fetchedGames.filter(game => {
+                            const userColor = game.white.username.toLowerCase() === props.filterRules.user ? 'white' : 'black';
+                            switch(game[userColor].result){
+                                case 'win':
+                                gameResult = 'win';
+                                break;
+                                case 'agreed':
+                                case 'repetition':
+                                case 'stalemate':
+                                case 'insufficient':
+                                case '50move':
+                                case 'timevsinsufficient':
+                                gameResult = 'draw';
+                                break;
+                                default:
+                                gameResult = 'lose'
+                            }
+                            return gameResult === props.filterRules.result
+                        })
+                    }
+                    // console.log(fetchedGames.map(game => ({white: game.white, black: game.black})))
+                    parsedGames.push(...fetchedGames);
                     j--
                 }
 
@@ -87,7 +105,7 @@ function UserGames(props) {
                     setGames(parsedGames);
                     setCounter(j);
                 }
-                setLoading(false)
+                setLoading(false)         
             } catch (err) {
                 setError(err.message);
                 setLoading(false)
@@ -122,7 +140,7 @@ function UserGames(props) {
         )
     }
 
-    return (<div className={style['games-wrapper']}>{error ? <h1>Something went wrong :(</h1> : info }</div>)
+    return (<div className={style['games-wrapper']}>{error ? <h1>Something went wrong</h1> : info }</div>)
 
 
 }

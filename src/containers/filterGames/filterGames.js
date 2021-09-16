@@ -36,8 +36,8 @@ function FilterGames(props) {
         </div>
         <select name="result" className={style.select} onChange={(value) => setResult(value.currentTarget.value)}>
             <option value="">Result</option>
-            <option value="won">Won</option>
-            <option value="lost">Lost</option>
+            <option value="win">Won</option>
+            <option value="lose">Lost</option>
             <option value="draw">Draw</option>
         </select>
         <select name="color" className={style.select} onChange={(value) => setColor(value.currentTarget.value)}>

@@ -104,7 +104,7 @@ function UserData(props) {
     }, [props.user])
 
     function setFilteringRules(rules) {
-        setFilterRules(rules)
+        setFilterRules({...rules, user: props.user})
     }
 
     let userData = <Spinner />;
