@@ -22,7 +22,6 @@ function UserGames(props) {
         setLoading(true);
         setError(false);
         async function getPlayerGames() {
-            console.log(`passed rules are`, props.filterRules)
             try {
                 const url = `https://api.chess.com/pub/player/${props.user}/games/archives`;
                 const req = await fetch(url);
@@ -59,14 +58,15 @@ function UserGames(props) {
                 setLoading(false)
             } catch (err) {
                 setLoading(false);
-                setError(false);
+                setError(err.message);
             }
         }
         getPlayerGames()
     }, [props.user, props.filterRules])
 
     useEffect(() => {
-        setLoading(true)
+        setLoading(true);
+        setError(false)
         async function parsePlayerGames() {
 
             try {
@@ -89,7 +89,7 @@ function UserGames(props) {
                 }
                 setLoading(false)
             } catch (err) {
-                setError(true);
+                setError(err.message);
                 setLoading(false)
             }
         }
@@ -122,7 +122,7 @@ function UserGames(props) {
         )
     }
 
-    return (<div className={style['games-wrapper']}>{error ? <h1>Something went wrong</h1> : info }</div>)
+    return (<div className={style['games-wrapper']}>{error ? <h1>Something went wrong :(</h1> : info }</div>)
 
 
 }
