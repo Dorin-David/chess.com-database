@@ -63,7 +63,7 @@ function UserGames(props) {
                 let parsedGames = [...games];
                 let j = counter;
                 if(props.filterRules.startDate || props.filterRules.endDate) parsedGames = []; 
-                while (j >= 0 && parsedGames.length < (offset * 4)) {
+                while (j >= 0 && parsedGames.length < (offset * 8)) {
                     if(j === null) return setLoading(false)
                     const specificMonthGamesUrl = userGamesArchive[j];
                     const req = await fetch(specificMonthGamesUrl);
@@ -96,7 +96,6 @@ function UserGames(props) {
                             return gameResult === props.filterRules.result
                         })
                     }
-                    // console.log(fetchedGames.map(game => ({white: game.white, black: game.black})))
                     parsedGames.push(...fetchedGames);
                     j--
                 }
