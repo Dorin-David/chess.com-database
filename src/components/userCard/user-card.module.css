@@ -72,27 +72,9 @@ p > svg {
     color: var(--icon)
 }
 
-
-@media screen and (max-width: 850px){
+@media screen and (max-width: 1000px){
     .wrapper {
+        min-width: 500px;
         width: 70%;
-    }
-}
-
-@media screen and (max-width: 700px){
-    .wrapper {
-        width: 80%;
-    }
-}
-
-@media screen and (max-width: 600px){
-    .wrapper {
-        width: 90%;
-    }
-}
-
-@media screen and (max-width: 500px){
-    .wrapper {
-        width: 100%;
     }
 }

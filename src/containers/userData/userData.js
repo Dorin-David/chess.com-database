@@ -121,12 +121,12 @@ function UserData(props) {
                 joined={user.joined}
                 lastOnline={user.lastOnline}
             />
-            <UserGames user={props.user} filterRules={filterRules} />
-            
             <div className={style.interactive}>
             <UserStats gamesStats={gamesStats} />
             <FilterGames forwardRules={setFilteringRules} />
             </div>
+            <UserGames user={props.user} filterRules={filterRules} />
+            
         </div>
         </>)
 
