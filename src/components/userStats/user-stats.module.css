@@ -7,7 +7,7 @@
     grid-area: stats;
     align-self: flex-start;
     justify-self: center;
-    margin: 1rem 0.5rem;
+    margin: 1rem;
 }
 
 .stats-wrapper > p{

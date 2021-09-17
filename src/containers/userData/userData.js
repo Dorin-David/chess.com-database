@@ -104,7 +104,7 @@ function UserData(props) {
     }, [props.user])
 
     function setFilteringRules(rules) {
-        setFilterRules({...rules, user: props.user})
+        setFilterRules({ ...rules, user: props.user })
     }
 
     let userData = <Spinner />;
@@ -121,9 +121,12 @@ function UserData(props) {
                 joined={user.joined}
                 lastOnline={user.lastOnline}
             />
-            <UserStats gamesStats={gamesStats} />
             <UserGames user={props.user} filterRules={filterRules} />
+            
+            <div className={style.interactive}>
+            <UserStats gamesStats={gamesStats} />
             <FilterGames forwardRules={setFilteringRules} />
+            </div>
         </div>
         </>)
 

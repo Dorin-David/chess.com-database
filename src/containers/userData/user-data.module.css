@@ -3,12 +3,19 @@
     width: 100%;
     display: grid;
     grid-template-columns: 1fr 0.7fr 0.3fr;
-    grid-template-rows: minmax(500px, auto) repeat(2, 500px);
+    grid-template-rows: 300px minmax(300px, auto) 500px;
     grid-template-areas: 
-    "user-card user-card stats"
-    "games       games   filtering"
+    "user-card user-card interactive"
+    "games       games   interactive"
     ;
     margin-top: 2rem;
+}
+
+.interactive {
+    grid-area: interactive;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 
