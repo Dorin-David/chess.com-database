@@ -1,6 +1,7 @@
 import {useState} from 'react';
 import UserData from './containers/userData/userData';
 import Form from "./components/Form/Form";
+import WelcomeInfo from './components/WelcomeInfo/WelcomeInfo';
 import './style/base.css'
 
 function App() {
@@ -23,8 +24,9 @@ function App() {
  if(searching) {
    userInfo = <UserData user={user}/>
  }
-
+ 
   return (<>
+  {!searching ? <WelcomeInfo/> : null}
   <Form handleFormChange={handleFormChange} submitSearch={submitSearch} value={query}/>
   {userInfo}
   </>)
