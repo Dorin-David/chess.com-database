@@ -1,5 +1,19 @@
+import ReactCountryFlag from "react-country-flag"
+
 function CountryFlag(props){
-    return <img src={`https://www.countryflags.io/${props.isoCode}/flat/32.png`} alt="flag" />
+    const { isoCode } = props;
+    const style = {
+        width: '1.2rem',
+        height: '1.2rem',
+    }
+
+    return <ReactCountryFlag 
+                countryCode={isoCode} 
+                svg 
+                style={style} 
+                className="country-flag" 
+                alt="Country Flag" 
+            /> 
 }
 
 export default CountryFlag
