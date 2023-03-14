@@ -7,15 +7,7 @@ import UserGames from '../userGames/userGames';
 import FilterGames from '../filterGames/filterGames';
 import style from './user-data.module.css';
 
-/*
-{
-  "startDate": "2021-09-13T22:00:00.000Z",
-  "endDate": "2021-09-22T22:00:00.000Z",
-  "result": "won",
-  "color": "white",
-  "order": "oldest"
-}
-*/
+const USER_NOT_FOUND_ERROR = 'data.url is undefined';
 
 function UserData(props) {
     const [loading, setLoading] = useState(false);
@@ -132,7 +124,7 @@ function UserData(props) {
 
     }
 
-    return !error ? userData : <h1 className={style.error}>Something went wrong :(</h1>
+    return !error ? userData : <h3 className={style.error}> {error == USER_NOT_FOUND_ERROR ? 'User not found' : 'Something went wrong :(' } </h3>
 
 }
 
