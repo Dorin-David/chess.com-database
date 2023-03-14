@@ -10,11 +10,14 @@ function App() {
   const [user, setUser] = useState(null);
 
   function handleFormChange(e){
-    setQuery(e.target.value)
+    if( e.target.value ) setQuery(e.target.value); 
   }
 
-  function submitSearch() {
-    if (!query) return setSearching(false);
+  function submitSearch(event) {
+    event.preventDefault()
+
+    if (!query) return 
+
     setSearching(true)
     setUser(query.trim().toLowerCase())
     setQuery('')
